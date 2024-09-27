@@ -69,7 +69,7 @@ Téléchargez le binaire depuis le site WireGuard, et installer le.
   - Cliquez sur "Add Tunnel".
   - Choisissez "Add empty tunnel"
   
-![alt text](<wireguard win10 add tunnel.jpg>)
+![alt text](<Screenshots/wireguard win10 add tunnel.jpg>)
 
 Lorsque vous cliquez sur "Add empty tunnel" une nouvelle fenêtre apparaîtra. Gardez la partie suivante :
 
@@ -116,7 +116,7 @@ Endpoint = <IP publique de votre serveur>
 
 Avant de fermer la fenêtre, récupérez la clé publique du client et copiez-la dans votre éditeur de texte.
 
-![alt text](<2024-09-27 15_56_43-Wireguard_screen-1.png>)
+![alt text](<Screenshots/2024-09-27 15_56_43-Wireguard_screen-1.png>)
 
 Donnez un nom à votre tunnel et sauvegardez-le.
 
@@ -144,7 +144,8 @@ Remplacez PublicKey par la clé publique du client que vous avez récupérée lo
 Modifiez la partie AllowIPs, et mettez l'IP privé de votre wg0 sur Windows 11 (dans mon exemple 10.0.0.2/32)
 
 Votre fichier devrais ressembler a ceci :
-![alt text](<2024-09-27 18_01_16-wg.png>)
+
+![alt text](<Screenshots/2024-09-27 18_01_16-wg.png>)
 
 Dans le cas ou vous voulez avoir une communication vers l'exterieur en utilisant votre VPN, il faut activer le routing en ajoutant/décommentant la ligne suivante dans le fichier /etc/sysctl.conf :
 
