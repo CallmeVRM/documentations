@@ -1,4 +1,4 @@
-Installation en mode natif sur debian12 : 
+##Installation de WireGuard en IPv4 en mode natif sur debian12 : 
 
 ### Partie serveur :
 
@@ -21,6 +21,9 @@ En option vous pouvez ajouter une pre-shared key :
 ```bash
 (umask 277 && wg genpsk > /etc/wireguard/psk)
 ```
+La clé pré-partagée (PresharedKey ou PSK) est une amélioration facultative de la sécurité conformément au protocole WireGuard et doit être une PSK unique par client pour une sécurité renforcée. 
+En ajoutant une clé pré-partagée (preshared key) dans le processus, on renforce le mécanisme des clés de chiffrement et d'authentification, réduisant ainsi les potentielles attaques futures par ordinateur quantique.
+
 
 A partie de la vous avez le choix entre deux options :
 
@@ -65,21 +68,21 @@ AllowedIPs = 10.0.0.2/32,fd12:3456:789a::2/128
 PersistentKeepalive = 25
 ```
 
-Il faut ensuite activé le forwarding en ajoutant la ligne suivante dans le fichier /etc/sysctl.conf
+Il faut ensuite activer le forwarding en ajoutant la ligne suivante dans le fichier /etc/sysctl.conf :
+
+net.ipv4.ip_forward=1
 
 Rendez la configuration persistante avec la commande :
 
 sudo sysctl -p
 
-Si vous avez iptables d’installer il faut configurer le bon MASQUERADE :
+Si vous avez iptables d'installé, il faut configurer le bon MASQUERADE :
 
-Dans cette exemple ens18, c’est mon interface qui fait office de carte réseau physique, et donc c’est à travers elle que les paquets sortent vers l’extérieur.
+Dans cet exemple, ens18 est mon interface qui fait office de carte réseau physique, et donc c'est à travers elle que les paquets transitent depuis/vers l'extérieur.
 
 ```bash
 iptables -A FORWARD -i wg0 -o ens18 -j ACCEPT
 iptables -t nat -A POSTROUTING -o ens18 -j MASQUERADE
-ip6tables -A FORWARD -i wg0 -o ens18 -j ACCEPT
-ip6tables -t nat -A POSTROUTING -o ens18 -j MASQUERADE
 ```
 
 Ensuite et finalement vous activez l’interface wg0 :
