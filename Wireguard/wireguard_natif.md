@@ -1,16 +1,18 @@
 Installation en mode natif sur debian12 : 
 
-**Partie serveur :**
+### Partie serveur :
 
 Pour une installation stable vous pouvez passer par les sources officiels de debian en exécutant la commande suivante :
 
-`sudo apt update`
+```bash
+sudo apt update
+sudo apt install wireguard
+```
 
-`sudo apt install wireguard`
 
 Ensuite vous allez générer une paire de clés nécessaires pour l’authentification et le chiffrement des paquets :
 
-```
+```bash
 cd /etc/wireguard (umask 277 && wg genkey | tee privatekey | wg pubkey > publickey)
 ```
 
@@ -22,7 +24,7 @@ En option vous pouvez ajouter une pre-shared key :
 
 A partie de la vous avez le choix entre deux options :
 
-1. Configurer le serveur WireGuard graduellement et manuellement :
+#### 1. Configurer le serveur WireGuard graduellement et manuellement via des lignes de commandes :
 
 ```bash
 #Création d'une interface réseau virtuel sous le nom de wg0
@@ -47,7 +49,7 @@ ip link set wg0 up
 wg setconf wg0 /etc/wireguard/wg0.conf
 ```
 
-1. Configurer le serveur Wireguard via un fichier de configuration :
+#### 2. Configurer le serveur Wireguard via un fichier de configuration :
 
 ```bash
 [Interface]
