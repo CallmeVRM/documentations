@@ -1,82 +1,162 @@
-##Installation de WireGuard en IPv4 en mode natif sur debian12 : 
+## Installation de WireGuard en IPv4 en mode natif sur debian12 : 
 
 ### Partie serveur :
 
-Pour une installation stable vous pouvez passer par les sources officiels de debian en exécutant la commande suivante :
+Pour une installation stable, vous pouvez passer par les sources officielles de Debian en exécutant la commande suivante :
 
 ```bash
 sudo apt update
-sudo apt install wireguard
+sudo apt install wireguard -y
 ```
 
+Ensuite, vous allez générer une paire de clés nécessaires à l’authentification et au chiffrement des paquets.
 
-Ensuite vous allez générer une paire de clés nécessaires pour l’authentification et le chiffrement des paquets :
+Pour ouvrir un shell interactif avec des privilèges root :
 
 ```bash
-cd /etc/wireguard (umask 277 && wg genkey | tee privatekey | wg pubkey > publickey)
+sudo -s 
 ```
 
-En option vous pouvez ajouter une pre-shared key :
+Accédez au répertoire /etc/wireguard :
+```bash
+cd /etc/wireguard
+```
+
+Définissez les permissions des fichiers qui seront créés dans le dossier /etc/wireguard de manière à ce que seul le propriétaire (root dans ce cas) puisse lire et écrire les fichiers. Ensuite, créez une paire de clés privée/publique sous le nom "privatekey" et "publickey" :
 
 ```bash
-(umask 277 && wg genpsk > /etc/wireguard/psk)
+umask 277 && wg genkey | tee privatekey | wg pubkey > publickey
 ```
-La clé pré-partagée (PresharedKey ou PSK) est une amélioration facultative de la sécurité conformément au protocole WireGuard et doit être une PSK unique par client pour une sécurité renforcée. 
-En ajoutant une clé pré-partagée (preshared key) dans le processus, on renforce le mécanisme des clés de chiffrement et d'authentification, réduisant ainsi les potentielles attaques futures par ordinateur quantique.
 
-
-A partie de la vous avez le choix entre deux options :
-
-#### 1. Configurer le serveur WireGuard graduellement et manuellement via des lignes de commandes :
+Optionnellement, vous pouvez ajouter une clé pré-partagée (Pre-Shared Key) :
 
 ```bash
-#Création d'une interface réseau virtuel sous le nom de wg0
-ip link add dev wg0 type wireguard
-#Ajout d'une IPv4 pour l'interface wg0
-ip addr add 10.0.0.1/32 dev wg0
-#Ajout d'une IPv6
-ip addr add fd12:3456:789a::1/128 dev wg0
-#Déclaration du port d'écoute, et du lien vers la clé privé de l'interface wg0
-wg set wg0 listen-port 51820 private-key /etc/wireguard/privatekey
-#Déclartion du Peer, avec ca clé publique, un keepalive de 25s, et une IP (10.0.0.2/32) autorisée a communiquer avec le serveur
-wg set wg0 peer${CLIENT_PUBKEY} persistent-keepalive 25\
-    preshared-key /etc/wireguard/psk\
-    allowed-ips 10.0.0.2/32,fd12:3456:789a::2/128
-#Activation de l'interface wg0
-ip link set wg0 up
-
-# Enregistrer la configuration
-(umask 077 && wg showconf wg0 > /etc/wireguard/wg0.conf)
-
-#Pour restorer la configuration
-wg setconf wg0 /etc/wireguard/wg0.conf
+umask 277 && wg genpsk > /etc/wireguard/psk
 ```
 
-#### 2. Configurer le serveur Wireguard via un fichier de configuration :
+La clé pré-partagée (PresharedKey ou PSK) est une amélioration facultative de la sécurité conforme au protocole WireGuard. Il est recommandé d’utiliser une PSK unique par client pour renforcer la sécurité. En ajoutant une clé pré-partagée dans le processus, on améliore le mécanisme de chiffrement et d'authentification, ce qui réduit le risque d'attaques futures, notamment par des ordinateurs quantiques.
+
+Récupérez la clé publique et la PSK et stockez-les temporairement dans un éditeur de texte :
+```bash
+cat /etc/wireguard/publickey
+cat /etc/wireguard/psk
+```
+
+#### Configurer le serveur Wireguard :
+
+Créez un fichier dans ```/etc/wireguard``` :
+
+```bash
+nano /etc/wireguard/wg0.conf
+```
+
+Copiez ce contenu et remplacez la ligne ```PrivateKey``` par le contenu du fichier ```/etc/wireguard/privatekey``` :
 
 ```bash
 [Interface]
-Address = 10.0.0.1/32, fd12:3456:789a::1/128
+Address = 10.0.0.1/32
 ListenPort = 51820
-PrivateKey = <Server wg0 Private Key>
-SaveConfig = true
+PrivateKey = <Server wg0 PrivateKey>
+```
+
+
+### La partie client :
+#### - Windows 11
+Téléchargez le binaire depuis le site WireGuard, et installer le.
+
+- Lancez un editeur de texte.
+- Lancez votre WireGuard.
+  - Cliquez sur "Add Tunnel".
+  - Choisissez "Add empty tunnel"
+  
+![alt text](<wireguard win10 add tunnel.jpg>)
+
+Lorsque vous cliquez sur "Add empty tunnel" une nouvelle fenêtre apparaîtra. Gardez la partie suivante :
+
+```bash
+[Interface]
+PrivateKey = xxxXxxXxXXXxXxxxx
+```
+Sous ces informations, ajoutez les lignes suivantes :
+
+```bash
+Address = 10.0.0.2/32
+ListenPort = 51820
 
 [Peer]
 PublicKey = <Client wg0 public key>
-#PresharedKey = <Pre-Shared Key>
-AllowedIPs = 10.0.0.2/32,fd12:3456:789a::2/128
+PresharedKey = <Pre-Shared Key>
+AllowedIPs = 0.0.0.0/1, 128.0.0.0/1
+PersistentKeepalive = 25
+Endpoint = <IP_publique_de_votre_serveur:port>
+```
+
+Remplacez la partie ```PublicKey``` du Peer par la clé publique de votre serveur (celle copiée dans l'éditeur de texte précédemment), ainsi que la ```PresharedKey``` (PSK). Ajoutez également ```Endpoint```, qui est l'adresse IP publique de votre serveur ainsi que le port.
+
+
+Gardez les ```AllowedIPs``` comme dans l'exemple ; la gestion des communications sera réglée côté serveur. Si vous voulez limiter la communication uniquement au serveur, utilisez son IP privée, mais cela peut entraîner des bugs.
+
+Le ```PersistentKeepalive``` est reglé a 25 secondes, cela permet de garder une connexion active en la renouvellement toutes les 25 secondes.
+
+Finalement votre fichier ressemblera donc a ceci :
+
+```bash
+[Interface]
+PrivateKey = <Client wg0 Private Key>
+Address = 10.0.0.2/32
+ListenPort = 51820
+
+[Peer]
+PublicKey = <Server wg0 public key>
+PresharedKey = <Pre-Shared Key>
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 25
+Endpoint = <IP publique de votre serveur>
+```
+
+Avant de fermer la fenêtre, récupérez la clé publique du client et copiez-la dans votre éditeur de texte.
+
+![alt text](<2024-09-27 15_56_43-Wireguard_screen-1.png>)
+
+Donnez un nom à votre tunnel et sauvegardez-le.
+
+## Retour sur le serveur :
+Vous allez maintenant ajouter votre client (Peer) sur le serveur pour l’autoriser à communiquer de manière sécurisée.
+
+Pour cela, ouvrez le fichier de configuration de WireGuard sur le serveur :
+
+```sudo nano /etc/wireguard/wg0.conf```
+
+et ajoutez la partie suivante :
+
+```bash
+[Peer]
+PublicKey = <Client wg0 public key>
+PresharedKey = <Pre-Shared Key>
+AllowedIPs = 10.0.0.2/32
 PersistentKeepalive = 25
 ```
 
-Il faut ensuite activer le forwarding en ajoutant la ligne suivante dans le fichier /etc/sysctl.conf :
+Remplacez PublicKey par la clé publique du client que vous avez récupérée lors de la création du tunnel sur Windows 11, et la PresharedKey par celle du fichier /etc/wireguard/psk que vous avez créé sur le serveur.
 
-net.ipv4.ip_forward=1
+>Rappel : Une PSK par client
+
+Modifiez la partie AllowIPs, et mettez l'IP privé de votre wg0 sur Windows 11 (dans mon exemple 10.0.0.2/32)
+
+Votre fichier devrais ressembler a ceci :
+![alt text](<2024-09-27 18_01_16-wg.png>)
+
+Dans le cas ou vous voulez avoir une communication vers l'exterieur en utilisant votre VPN, il faut activer le routing en ajoutant/décommentant la ligne suivante dans le fichier /etc/sysctl.conf :
+
+```net.ipv4.ip_forward=1```
 
 Rendez la configuration persistante avec la commande :
 
+```bash
 sudo sysctl -p
+```
 
-Si vous avez iptables d'installé, il faut configurer le bon MASQUERADE :
+Installer iptables ou autres solutions, ensuite il faut configurer le bon MASQUERADE :
 
 Dans cet exemple, ens18 est mon interface qui fait office de carte réseau physique, et donc c'est à travers elle que les paquets transitent depuis/vers l'extérieur.
 
@@ -92,4 +172,33 @@ sudo wg-quick up wg0
 sudo systemctl enable wg-quick@wg0
 ```
 
-Commandes utiles :
+Félécitation ! Votre serveur VPN est maintenant configurer.
+
+
+
+#### - MacOS
+
+
+#### - Linux (Ubuntu)
+
+
+
+
+
+### Commandes utiles :
+
+Arrêter l'interface wg0
+
+```sudo wg-quick down wg0```
+
+Redémarrer l'interface wg0 (uniquement après l'avoir down)
+
+```sudo systemctl restart wg-quick@wg0```
+
+Pour vérifier le status de l'interface wg0
+
+```sudo systemctl status wg-quick@wg0```
+
+>Si vous avez un serveur DNS au niveau de votre infrastructure vous pouvez le déclarer dans la partie [Interface] du serveur ainsi que le client. le serveur DNS doit être le même pour les deux.
+
+
