@@ -232,7 +232,7 @@ sudo apt install wireguard -y
 
 Votre configuration devra ressembler a ceci :
 
-![alt text](<Capture d’écran 2024-09-28 à 14.49.09.png>)
+![alt text](<Screenshots/Capture d’écran 2024-09-28 à 14.49.09.png>)
 
 Donnez un nom à votre tunnel et sauvegardez-le.
 
