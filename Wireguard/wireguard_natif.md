@@ -38,9 +38,10 @@ umask 277 && wg genpsk > /etc/wireguard/psk
 
 *La clé pré-partagée (PresharedKey ou PSK) est une amélioration facultative de la sécurité conforme au protocole WireGuard. Il est recommandé d’utiliser une PSK unique par client pour renforcer la sécurité. En ajoutant une clé pré-partagée dans le processus, on améliore le mécanisme de chiffrement et d'authentification, ce qui réduit le risque d'attaques futures, notamment par des ordinateurs quantiques.*
 
-- Récupérez la clé publique et la PSK et stockez-les temporairement dans un éditeur de texte :
+- Récupérez la clé publique, la clé privé et la PSK et stockez-les temporairement dans un éditeur de texte :
 ```bash
 cat /etc/wireguard/publickey
+cat /etc/wireguard/privatekey
 cat /etc/wireguard/psk
 ```
 
