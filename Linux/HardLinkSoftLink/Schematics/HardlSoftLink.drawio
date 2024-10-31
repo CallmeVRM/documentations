@@ -1,0 +1,173 @@
+<mxfile host="65bd71144e">
+    <diagram id="E12KZsY5CCjiIL5FMOFu" name="Page-1">
+        <mxGraphModel dx="946" dy="553" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3" value="&lt;font face=&quot;Lucida Console&quot; data-font-src=&quot;https://fonts.google.com/share?selection.family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&quot;&gt;Stockage&lt;/font&gt;" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="123.5" y="33" width="128" height="123" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;strokeWidth=1;align=center;outlineConnect=0;dashed=0;outlineConnect=0;shape=mxgraph.aws3d.file;aspect=fixed;strokeColor=#292929;" vertex="1" parent="1">
+                    <mxGeometry x="86.5" y="354" width="43.62" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Fichier original&lt;br style=&quot;font-size: 12px;&quot;&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontFamily=Lucida Console;fontStyle=0" vertex="1" parent="1">
+                    <mxGeometry x="47" y="463" width="134" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;fontSize=16;endArrow=none;endFill=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="8">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="77" y="407" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="57" y="243"/>
+                            <mxPoint x="57" y="410"/>
+                            <mxPoint x="77" y="410"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.195;entryDx=0;entryDy=0;entryPerimeter=0;fontFamily=Garamond;fontSize=16;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="8" target="3">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="280.5" y="243"/>
+                            <mxPoint x="280.5" y="57"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Inode&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="140" y="190" width="95" height="105" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="Pointer" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontFamily=Lucida Console;fontStyle=0" vertex="1" parent="8">
+                    <mxGeometry x="13.5" y="41" width="69" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;strokeWidth=1;align=center;outlineConnect=0;dashed=0;outlineConnect=0;shape=mxgraph.aws3d.file;aspect=fixed;strokeColor=#292929;" vertex="1" parent="1">
+                    <mxGeometry x="264.5" y="358" width="43.62" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Lien symbolique&lt;br style=&quot;font-size: 12px;&quot;&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontFamily=Lucida Console;fontStyle=0" vertex="1" parent="1">
+                    <mxGeometry x="227.5" y="463" width="126" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="endArrow=classic;html=1;fontSize=16;dashed=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="245" y="411" as="sourcePoint"/>
+                        <mxPoint x="139.5" y="413" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="17" value="&lt;font face=&quot;Lucida Console&quot; data-font-src=&quot;https://fonts.google.com/share?selection.family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&quot;&gt;Stockage&lt;/font&gt;" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="517.5" y="30" width="128" height="123" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;strokeWidth=1;align=center;outlineConnect=0;dashed=0;outlineConnect=0;shape=mxgraph.aws3d.file;aspect=fixed;strokeColor=#292929;" vertex="1" parent="1">
+                    <mxGeometry x="468.5" y="351" width="43.62" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Fichier original&lt;br style=&quot;font-size: 12px;&quot;&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontFamily=Lucida Console;fontStyle=0" vertex="1" parent="1">
+                    <mxGeometry x="429" y="460" width="134" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=16;endArrow=none;endFill=0;startArrow=classic;startFill=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="22">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="462" y="409" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="558" y="322"/>
+                            <mxPoint x="441" y="322"/>
+                            <mxPoint x="441" y="407"/>
+                            <mxPoint x="462" y="407"/>
+                        </Array>
+                        <mxPoint x="564" y="292" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.195;entryDx=0;entryDy=0;entryPerimeter=0;fontFamily=Garamond;fontSize=16;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="22" target="17">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="674.5" y="240"/>
+                            <mxPoint x="674.5" y="54"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="22" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Inode&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="534" y="187" width="95" height="105" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Pointer" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontFamily=Lucida Console;fontStyle=0" vertex="1" parent="22">
+                    <mxGeometry x="13.5" y="41" width="69" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;strokeWidth=1;align=center;outlineConnect=0;dashed=0;outlineConnect=0;shape=mxgraph.aws3d.file;aspect=fixed;strokeColor=#292929;" vertex="1" parent="1">
+                    <mxGeometry x="648.5" y="355" width="43.62" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Lien physique&lt;br style=&quot;font-size: 12px;&quot;&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontFamily=Lucida Console;fontStyle=0" vertex="1" parent="1">
+                    <mxGeometry x="618.5" y="460" width="112" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=16;endArrow=none;endFill=0;startArrow=classic;startFill=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="22">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="694.5" y="407" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="605" y="322"/>
+                            <mxPoint x="714" y="322"/>
+                            <mxPoint x="714" y="407"/>
+                        </Array>
+                        <mxPoint x="585" y="301" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="29" value="&lt;font face=&quot;Lucida Console&quot; data-font-src=&quot;https://fonts.google.com/share?selection.family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&quot;&gt;Stockage&lt;/font&gt;" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="260.5" y="595" width="128" height="123" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;strokeWidth=1;align=center;outlineConnect=0;dashed=0;outlineConnect=0;shape=mxgraph.aws3d.file;aspect=fixed;strokeColor=#292929;" vertex="1" parent="1">
+                    <mxGeometry x="211.5" y="916" width="43.62" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Fichier original&lt;br style=&quot;font-size: 12px;&quot;&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontFamily=Lucida Console;fontStyle=0" vertex="1" parent="1">
+                    <mxGeometry x="172" y="1027" width="134" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=16;endArrow=none;endFill=0;startArrow=classic;startFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="34">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="205" y="974" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="184" y="811"/>
+                            <mxPoint x="184" y="972"/>
+                            <mxPoint x="205" y="972"/>
+                        </Array>
+                        <mxPoint x="307" y="857" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="42" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.003;entryY=0.445;entryDx=0;entryDy=0;entryPerimeter=0;fontFamily=Lucida Console;fontSize=14;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="34" target="29">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="266" y="738"/>
+                            <mxPoint x="241" y="738"/>
+                            <mxPoint x="241" y="650"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="34" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Inode&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="219" y="758" width="95" height="105" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="Pointer" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontFamily=Lucida Console;fontStyle=0" vertex="1" parent="34">
+                    <mxGeometry x="13.5" y="41" width="69" height="26" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;strokeWidth=1;align=center;outlineConnect=0;dashed=0;outlineConnect=0;shape=mxgraph.aws3d.file;aspect=fixed;strokeColor=#292929;" vertex="1" parent="1">
+                    <mxGeometry x="391.5" y="920" width="43.62" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;Copie du &lt;br&gt;fichier original&lt;br style=&quot;font-size: 12px;&quot;&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontFamily=Lucida Console;fontStyle=0" vertex="1" parent="1">
+                    <mxGeometry x="354.5" y="1023" width="134" height="41" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=16;endArrow=none;endFill=0;startArrow=classic;startFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="39">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="437.5" y="972" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="457" y="811"/>
+                            <mxPoint x="457" y="972"/>
+                        </Array>
+                        <mxPoint x="328" y="866" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="41" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1.005;entryY=0.193;entryDx=0;entryDy=0;entryPerimeter=0;fontFamily=Lucida Console;fontSize=14;startArrow=none;startFill=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="39" target="29">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="388" y="738"/>
+                            <mxPoint x="408" y="738"/>
+                            <mxPoint x="408" y="619"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="39" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Inode&lt;/font&gt;" style="swimlane;whiteSpace=wrap;html=1;fontSize=16;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="340.12" y="758" width="95" height="105" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="Pointer" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontFamily=Lucida Console;fontStyle=0" vertex="1" parent="39">
+                    <mxGeometry x="13.5" y="41" width="69" height="26" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
