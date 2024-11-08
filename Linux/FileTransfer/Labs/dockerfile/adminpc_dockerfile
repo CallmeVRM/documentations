@@ -1,0 +1,71 @@
+# Utiliser une image de base Debian
+FROM debian:latest
+
+# Installer les outils nécessaires, incluant openssh-server et openssh-client (avec scp)
+RUN apt-get update && \
+    apt-get install -y sudo nano openssh-server openssh-client rsync iproute2 iputils-ping git curl && \
+    apt-get clean
+
+# Configurer SSH
+RUN mkdir /var/run/sshd
+
+# Créer un utilisateur non-root avec des permissions sudo
+RUN useradd -m -s /bin/bash adminlocal && \
+    echo "adminlocal:password" | chpasswd && \
+    usermod -aG sudo adminlocal && \
+    echo "adminlocal ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# Créer les autres utilisateurs sans droits sudo
+RUN useradd -m -s /bin/bash adminweb && \
+    echo "adminweb:password" | chpasswd && \
+    useradd -m -s /bin/bash adminbackup && \
+    echo "adminbackup:password" | chpasswd
+
+# Configurer SSH pour autoriser l'authentification par mot de passe et interdire la connexion root
+RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
+    sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+
+
+# Copier la clé privée depuis l'hôte
+RUN mkdir -p /home/adminlocal/.ssh
+COPY backup_key /home/adminlocal/.ssh/backup_key
+
+# Définir les permissions appropriées pour la clé privée
+RUN chmod 600 /home/adminlocal/.ssh/backup_key
+
+# Définir le répertoire de travail temporaire pour le clone du dépôt
+WORKDIR /tmp
+
+#git clone du repo AAA  et le placer dans /home/adminlocal
+RUN git clone --depth 1 https://github.com/CallmeVRM/edulab.git
+
+# Copier les dossiers 'atelier' et 'scripts' dans /home/adminlocal
+RUN cp -r /tmp/edulab/filetransfer/adminpc/atelier /home/adminlocal/ && \
+    cp -r /tmp/edulab/filetransfer/adminpc/scripts /home/adminlocal/
+
+# Télécharger WordPress et le placer dans /home/adminlocal/atelier
+RUN curl -o wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
+    mkdir -p /home/adminlocal/atelier/wordpress && \
+    tar -xzf wordpress.tar.gz -C /home/adminlocal/atelier/wordpress --strip-components=1 && \
+    rm wordpress.tar.gz
+
+# Supprimer le dépôt cloné pour nettoyer l'image
+RUN rm -rf /tmp/edulab
+
+#Redonner les droits en récursives à adminlocal
+RUN chown -R adminlocal:adminlocal /home/adminlocal
+
+# Définir le répertoire de travail final
+WORKDIR /home/adminlocal
+
+# Exposer le port 22 pour SSH
+EXPOSE 22
+
+# Utiliser l'instruction USER pour exécuter le conteneur avec adminlocal par défaut
+USER adminlocal
+
+# Définir le répertoire de travail pour l'utilisateur
+WORKDIR /home/adminlocal
+
+# Démarrer le serveur SSH en générant les clés d'hôte si elles n'existent pas
+CMD sudo ssh-keygen -A && sudo /usr/sbin/sshd -D

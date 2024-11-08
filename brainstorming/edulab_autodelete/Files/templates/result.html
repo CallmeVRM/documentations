@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Résultat du Lab</title>
+</head>
+<body>
+    <h1>Résultat</h1>
+    <p>{{ message|safe }}</p>
+    {% if container_info %}
+        <h2>Informations sur les Conteneurs</h2>
+        <ul>
+            {% for container_name, info in container_info.items() %}
+            <li>Hostname: {{ container_name.split('_')[0] }}, Nom du Conteneur: {{ info.container_name }}, IP: {{ info.ip }}
+                <!-- Utiliser le nom complet du conteneur pour générer le lien du terminal -->
+                <a href="{{ url_for('terminal', hostname=info.container_name) }}" target="_blank">Accéder au Terminal</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    <p>Le lab expirera à : {{ expiration_time }}</p>
+</body>
+</html>
